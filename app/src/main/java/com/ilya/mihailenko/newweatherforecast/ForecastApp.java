@@ -1,33 +1,35 @@
 package com.ilya.mihailenko.newweatherforecast;
 
+import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 
-import com.ilya.mihailenko.newweatherforecast.di.ComponentsHolder;
+import com.ilya.mihailenko.newweatherforecast.di.DaggerAppComponent;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 
 /**
  * Created by Ilya Mihailenko on 27/05/2018.
  * i.mihailenko@fasten.com
  * Last edit by Ilya Mihailenko on 27/05/2018.
  */
-public class ForecastApp extends Application  {
+public class ForecastApp extends Application implements HasActivityInjector {
 
-    private ComponentsHolder componentsHolder;
-
-    public static ForecastApp getApp(Context context) {
-        return (ForecastApp)context.getApplicationContext();
-    }
+    @Inject
+    DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        componentsHolder = new ComponentsHolder(this);
-        componentsHolder.init();
+        DaggerAppComponent.builder().create(this);
     }
 
-    public ComponentsHolder getComponentsHolder() {
-        return componentsHolder;
+    @Override
+    public DispatchingAndroidInjector<Activity> activityInjector() {
+        return activityDispatchingAndroidInjector;
     }
-
 }

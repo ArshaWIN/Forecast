@@ -1,28 +1,30 @@
 package com.ilya.mihailenko.newweatherforecast;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
-import com.ilya.mihailenko.newweatherforecast.di.main.MainActivityComponent;
+import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity {
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
+public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        MainActivityComponent component =
-                (MainActivityComponent) ForecastApp.getApp(this).getComponentsHolder()
-                        .getActivityComponent(getClass());
-        component.inject(this);
     }
 
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (isFinishing()) {
-            ForecastApp.getApp(this).getComponentsHolder().releaseActivityComponent(getClass());
-        }
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
     }
 }

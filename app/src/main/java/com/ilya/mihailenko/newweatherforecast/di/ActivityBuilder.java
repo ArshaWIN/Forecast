@@ -1,12 +1,11 @@
 package com.ilya.mihailenko.newweatherforecast.di;
 
 import com.ilya.mihailenko.newweatherforecast.MainActivity;
-import com.ilya.mihailenko.newweatherforecast.di.main.MainActivityComponent;
+import com.ilya.mihailenko.newweatherforecast.di.main.MainActivityModule;
+import com.ilya.mihailenko.newweatherforecast.di.testfragment.TestFragmentProvider;
 
 import dagger.Module;
-import dagger.Provides;
-import dagger.multibindings.ClassKey;
-import dagger.multibindings.IntoMap;
+import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by Ilya Mihailenko on 03/06/2018.
@@ -15,12 +14,9 @@ import dagger.multibindings.IntoMap;
  */
 
 @Module
-public class ActivityBuilder {
+public abstract class ActivityBuilder {
 
-    @Provides
-    @IntoMap
-    @ClassKey(MainActivity.class)
-    ActivityComponentBuilder provideFirstActivityBuilder(MainActivityComponent.Builder builder) {
-        return builder;
-    }
+
+    @ContributesAndroidInjector(modules = {MainActivityModule.class, TestFragmentProvider.class})
+    abstract MainActivity bindMainActivity();
 }

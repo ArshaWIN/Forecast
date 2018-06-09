@@ -1,7 +1,5 @@
 package com.ilya.mihailenko.newweatherforecast.di.main;
 
-import com.ilya.mihailenko.newweatherforecast.di.ActivityModule;
-
 import dagger.Module;
 
 /**
@@ -11,6 +9,15 @@ import dagger.Module;
  */
 
 @Module
-public class MainActivityModule implements ActivityModule {
+public class MainActivityModule {
 
+    /*@Provides
+    MainView provideMainView(MainActivity mainActivity){
+        return mainActivity;
+    }
+
+    @Provides
+    MainPresenter provideMainPresenter(MainView mainView, ApiService apiService){
+        return new MainPresenterImpl(mainView, apiService);
+    }*/
 }
