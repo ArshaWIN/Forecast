@@ -1,6 +1,7 @@
 package com.ilya.mihailenko.newweatherforecast.di;
 
-import com.ilya.mihailenko.newweatherforecast.MainActivity;
+import com.ilya.mihailenko.newweatherforecast.di.scopes.PerActivity;
+import com.ilya.mihailenko.newweatherforecast.ui.view.main.MainActivity;
 import com.ilya.mihailenko.newweatherforecast.di.main.MainActivityModule;
 import com.ilya.mihailenko.newweatherforecast.di.testfragment.TestFragmentProvider;
 
@@ -14,9 +15,9 @@ import dagger.android.ContributesAndroidInjector;
  */
 
 @Module
-public abstract class ActivityBuilder {
+abstract class ActivityBuilder {
 
-
+    @PerActivity
     @ContributesAndroidInjector(modules = {MainActivityModule.class, TestFragmentProvider.class})
     abstract MainActivity bindMainActivity();
 }

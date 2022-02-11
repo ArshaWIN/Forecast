@@ -1,6 +1,10 @@
 package com.ilya.mihailenko.newweatherforecast.di.main;
 
+import com.ilya.mihailenko.newweatherforecast.di.scopes.PerActivity;
+import com.ilya.mihailenko.newweatherforecast.ui.presenters.main.MainPresenter;
+
 import dagger.Module;
+import dagger.Provides;
 
 /**
  * Created by Ilya Mihailenko on 03/06/2018.
@@ -9,15 +13,17 @@ import dagger.Module;
  */
 
 @Module
-public class MainActivityModule {
+public abstract class MainActivityModule {
 
     /*@Provides
     MainView provideMainView(MainActivity mainActivity){
         return mainActivity;
     }
 
-    @Provides
-    MainPresenter provideMainPresenter(MainView mainView, ApiService apiService){
-        return new MainPresenterImpl(mainView, apiService);
+    */
+
+ /*   @Provides
+    static MainPresenter provideMainPresenter() {
+        return new MainPresenter();
     }*/
 }

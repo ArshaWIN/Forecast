@@ -13,6 +13,7 @@ import dagger.android.ContributesAndroidInjector;
 
 @Module
 public abstract class TestFragmentProvider {
+
     @ContributesAndroidInjector(modules = TestFragmentModule.class)
     abstract TestFragment provideDetailFragmentFactory();
 }

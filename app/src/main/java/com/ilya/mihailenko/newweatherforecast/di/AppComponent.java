@@ -14,7 +14,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {
         AndroidSupportInjectionModule.class,
         AppModule.class,
+        RestModule.class,
         ActivityBuilder.class})
+
 public interface AppComponent extends AndroidInjector<ForecastApp> {
     @Component.Builder
     abstract class Builder extends AndroidInjector.Builder<ForecastApp> {
